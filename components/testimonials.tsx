@@ -5,16 +5,17 @@ import { motion } from "framer-motion"
 import { ChevronLeft, ChevronRight, Star, Instagram } from "lucide-react"
 import Image from "next/image"
 
+
 const testimonials = [
   {
     id: 1,
     name: "Sarah Johnson",
-    role: "Marketing Director",
+    role: "Social Media Video Content",
     company: "TechVision",
     instagram: "@sarah_johnson",
     image: "/placeholder.svg?height=200&width=200",
     quote:
-      "Muhammad delivered an exceptional video editing project that exceeded our expectations. His attention to detail and creative vision transformed our raw footage into a compelling brand story.",
+      "I enjoyed working with him. He was timely and did his best to make sure I received the best quality of work!",
   },
   {
     id: 2,
@@ -40,41 +41,43 @@ const testimonials = [
 
 const clients = [
   {
-    name: "Jessica Williams",
-    role: "Fashion Designer",
-    instagram: "@jess_designs",
-    image: "/placeholder.svg?height=200&width=200",
+    name: "Huan Huan (Colleen) Yu",
+    role: "Vlogger",
+    instagram: "@filmwcolleen",
+    image: "/images/colleen.jpg",
   },
   {
-    name: "Alex Thompson",
-    role: "Music Producer",
-    instagram: "@alex_beats",
-    image: "/placeholder.svg?height=200&width=200",
+    name: "Gianna Cestone",
+    role: "Fitness Trainer",
+    instagram: "@giiicestone",
+    image: "/images/gianna.jpg"
   },
   {
-    name: "Sophia Garcia",
-    role: "Restaurant Owner",
-    instagram: "@sophia_eats",
-    image: "/placeholder.svg?height=200&width=200",
+    name: "Maggie",
+    role: "Science, Technology & Engineering",
+    instagram: "@maggieindata",
+    image: "/images/maggie.jpg",
   },
   {
-    name: "David Kim",
-    role: "Fitness Influencer",
-    instagram: "@david_fit_life",
-    image: "/placeholder.svg?height=200&width=200",
+    name: "Beatrice",
+    role: "Entrepreneur",
+    instagram: "@_beatrips",
+    image: "/images/beatrice.jpg",
+  },
+ 
+  {
+    name: "Farah Hawa",
+    role: "Cyber Security Expert",
+    instagram: "@farah_hawaa",
+    image: "/images/farah.png",
   },
   {
-    name: "Olivia Parker",
-    role: "Wedding Planner",
-    instagram: "@olivia_weddings",
-    image: "/placeholder.svg?height=200&width=200",
+    name: "Matt Chung",
+    role: "Adventurous Storyteller",
+    instagram: "@lifewithchunger",
+    image: "/images/matt.jpg",
   },
-  {
-    name: "James Wilson",
-    role: "Real Estate Agent",
-    instagram: "@james_properties",
-    image: "/placeholder.svg?height=200&width=200",
-  },
+
 ]
 
 export default function Testimonials() {
@@ -100,6 +103,25 @@ export default function Testimonials() {
     setAutoplay(false)
     setCurrent((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1))
   }
+
+  const CLIENTS_PER_PAGE = 6
+
+const [clientIndex, setClientIndex] = useState(0)
+const totalClientPages = Math.ceil(clients.length / CLIENTS_PER_PAGE)
+
+const nextClientPage = () => {
+  setClientIndex((prev) => (prev === totalClientPages - 1 ? 0 : prev + 1))
+}
+
+const prevClientPage = () => {
+  setClientIndex((prev) => (prev === 0 ? totalClientPages - 1 : prev - 1))
+}
+
+const visibleClients = clients.slice(
+  clientIndex * CLIENTS_PER_PAGE,
+  clientIndex * CLIENTS_PER_PAGE + CLIENTS_PER_PAGE
+)
+
 
   return (
     <section id="testimonials" className="py-20 px-4 md:px-8 lg:px-16 bg-black">
@@ -199,37 +221,63 @@ export default function Testimonials() {
           </div>
         </div>
 
-        <div>
-          <h3 className="text-2xl font-bold text-center mb-10">Clients I've Worked With</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {clients.map((client, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -10 }}
-                className="bg-gray-800 p-6 rounded-lg flex flex-col items-center text-center"
-              >
-                <div className="relative w-20 h-20 rounded-full overflow-hidden mb-4">
-                  <Image src={client.image || "/placeholder.svg"} alt={client.name} fill className="object-cover" />
-                </div>
-                <h4 className="text-lg font-semibold">{client.name}</h4>
-                <p className="text-gray-400 text-sm mb-3">{client.role}</p>
-                <a
-                  href={`https://instagram.com/${client.instagram.substring(1)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center text-purple-400 hover:text-purple-300 transition-colors"
-                >
-                  <Instagram className="w-4 h-4 mr-1" />
-                  {client.instagram}
-                </a>
-              </motion.div>
-            ))}
-          </div>
+        <div className="relative">
+  <h3 className="text-2xl font-bold text-center mb-10">Clients I've Worked With</h3>
+
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 transition-all duration-500">
+    {visibleClients.map((client, index) => (
+      <motion.div
+        key={index}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: index * 0.1 }}
+        viewport={{ once: true }}
+        whileHover={{ y: -10 }}
+        className="bg-gray-800 p-6 rounded-lg flex flex-col items-center text-center"
+      >
+        <div className="relative w-20 h-20 rounded-full overflow-hidden mb-4">
+          <Image
+            src={client.image || "/placeholder.svg"}
+            alt={client.name}
+            fill
+            className="object-cover"
+          />
         </div>
+        <h4 className="text-lg font-semibold">{client.name}</h4>
+        <p className="text-gray-400 text-sm mb-3">{client.role}</p>
+        <a
+          href={`https://instagram.com/${client.instagram.substring(1)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center text-purple-400 hover:text-purple-300 transition-colors"
+        >
+          <Instagram className="w-4 h-4 mr-1" />
+          {client.instagram}
+        </a>
+      </motion.div>
+    ))}
+  </div>
+
+  {/* Navigation Buttons */}
+  <div className="flex justify-center items-center gap-4">
+    <button
+      onClick={prevClientPage}
+      className="bg-purple-700 hover:bg-purple-800 text-white p-2 rounded-full transition-all shadow-lg"
+      aria-label="Previous clients"
+    >
+      <ChevronLeft className="w-5 h-5" />
+    </button>
+
+    <button
+      onClick={nextClientPage}
+      className="bg-purple-700 hover:bg-purple-800 text-white p-2 rounded-full transition-all shadow-lg"
+      aria-label="Next clients"
+    >
+      <ChevronRight className="w-5 h-5" />
+    </button>
+  </div>
+        </div>
+
       </div>
     </section>
   )
