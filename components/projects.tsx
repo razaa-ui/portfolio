@@ -150,6 +150,17 @@ const projects = [
     tags: ["Car Editing", "Automotive Cinematics", "Engine Sounds", "Smooth Transitions"],
     url: "https://drive.google.com/drive/folders/1CkXnLc4MXA7O7IZAxSPNc3bkHjxsKSXQ",
   },
+  {
+    id: 14,
+    title: "Shortform Video Edit",
+    category: "video",
+    image:
+      "https://influencermarketinghub.com/wp-content/uploads/2022/11/image-6-1-1024x852.png",
+      description: "Fast-paced shortform video edit crafted for platforms like Instagram Reels, TikTok, and YouTube Shorts — featuring quick transitions, trendy effects, synced audio, and engaging visuals to grab attention instantly.",
+      tags: ["Reels Editing", "Shortform Content", "Fast Transitions", "Trend Syncing"],
+      
+    url: "https://drive.google.com/drive/folders/1DmuucNGFW6SuOwFpXBE5uWlazLd0s3E7",
+  },
 ]
 
 export default function Projects() {
