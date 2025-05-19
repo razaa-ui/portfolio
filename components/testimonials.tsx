@@ -41,6 +41,20 @@ const testimonials = [
 // Updated clients array with platform property
 const clients = [
   {
+    name: "Leena Snoubar",
+    role: "Vlogger",
+    platform: "instagram",
+    instagram: "@withloveleena",
+    image: "/images/leena.jpg",
+  },
+  {
+    name: "Destinee’s Hair 💗",
+    role: "Vlogger",
+    platform: "youtube",
+    youtube: "@DestineesHair",
+    image: "/images/des1.jpg",
+  },
+  {
     name: "Huan Huan (Colleen) Yu",
     role: "Vlogger",
     platform: "instagram",
